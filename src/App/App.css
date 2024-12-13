@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   }
 
 body {
@@ -9,7 +10,7 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   padding: 25px;
 }
@@ -31,52 +32,6 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-}
-
-.poster-container {
-  position: relative;
-  width: 350px;
-  padding: 0;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.poster {
-  width: 100%;
-  border-radius: 20px 20px 0 0;
-  padding-bottom: 75px;
-}
-
-.vote-banner {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0 0 20px 20px;
-  box-sizing: border-box;
-}
-
-.vote-banner p {
-  text-align: center;
-  margin: 0;
-  font-size: 1.25rem;
-  color: #333;
-}
-
-.vote-button {
+  gap: 20px;
   padding: 20px;
-  border: none;
-  background-color: white;
-  display: flex;
-}
-
-.vote-button img {
-  width: 40px;
-  height: 40px;
 }

@@ -1,0 +1,45 @@
+.movie-poster {
+  position: relative;
+  width: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.vote-banner {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 0 0 20px 20px;
+  box-sizing: border-box;
+  margin-top: -20px;
+}
+
+.vote-banner p {
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.vote-button {
+  padding: 10px;
+  border: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.vote-button img {
+  width: 40px;
+  height: 40px;
+}
