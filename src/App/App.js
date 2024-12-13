@@ -22,11 +22,11 @@ function App() {
             <img className='poster' src={poster.poster_path} alt={`Poster of ${poster.title}`}></img>
             <div className='vote-banner'>
               <button className='vote-button'>
-                <img src={upvote} alt="Up vote button"/>
+                <img className='upvote' src={upvote} alt="Up vote button"/>
               </button>
               <p>{poster.vote_count}</p>
               <button className='vote-button'>
-                <img src={downvote} alt="Down vote button"/>
+                <img className='downvote' src={downvote} alt="Down vote button"/>
               </button>
             </div>
           </div>

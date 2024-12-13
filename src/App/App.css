@@ -45,7 +45,7 @@ section {
 .poster {
   width: 100%;
   border-radius: 20px 20px 0 0;
-  padding-bottom: 105px;
+  padding-bottom: 75px;
 }
 
 .vote-banner {
@@ -56,7 +56,7 @@ section {
   background-color: white;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-radius: 0 0 20px 20px;
   box-sizing: border-box;
@@ -70,8 +70,13 @@ section {
 }
 
 .vote-button {
-  padding: 6px 12px;
+  padding: 20px;
   border: none;
   background-color: white;
-  font-size: .75em;
+  display: flex;
+}
+
+.vote-button img {
+  width: 40px;
+  height: 40px;
 }
