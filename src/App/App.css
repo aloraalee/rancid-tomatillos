@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   }
 
 body {
@@ -9,7 +10,7 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   padding: 25px;
 }
@@ -25,4 +26,12 @@ p {
   text-align: center;
   margin-top: 50px;
   color: white;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
