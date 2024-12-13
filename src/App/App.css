@@ -34,36 +34,44 @@ section {
   gap: 10px;
 }
 
-.movie-poster {
-  /* max-width: 150px; */
-}
-
 .poster-container {
   position: relative;
   width: 350px;
-  height: auto;
-  display: inline-block;
-  padding: 20px;
+  padding: 0;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .poster {
-  display: block;
   width: 100%;
   border-radius: 20px 20px 0 0;
+  padding-bottom: 105px;
 }
 
 .vote-banner {
-  position: relative;
+  position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
   background-color: white;
-  text-align: center;
-  padding: 22px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 0 0 20px 20px;
+  box-sizing: border-box;
 }
 
 .vote-banner p {
+  text-align: center;
   margin: 0;
   font-size: 1.25rem;
   color: #333;
+}
+
+.vote-button {
+  padding: 6px 12px;
+  border: none;
+  background-color: white;
+  font-size: .75em;
 }
