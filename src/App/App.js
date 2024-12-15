@@ -9,14 +9,34 @@ import moviePosters from '../data/movie_posters';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 
 function App() {
-  const [posters] = useState(moviePosters)
+  const [posters, setPosters] = useState(moviePosters)
+
+  function updateVoteCount(poster, change) {
+    return { ...poster, vote_count: poster.vote_count + change }
+  }
+
+  function incrementVoteDown(id) {
+    setPosters(prevPosters =>
+      prevPosters.map(poster => 
+        poster.id ===id? updateVoteCount(poster, -1) : poster
+      )
+    )
+    }
+
+  function incrementVoteUp(id) {
+    setPosters(prevPosters =>
+      prevPosters.map(poster => 
+        poster.id ===id? updateVoteCount(poster, +1) : poster
+      )
+    )
+    }
 
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
       </header>
-      <MoviesContainer moviePosters={posters}/>
+      <MoviesContainer moviePosters={posters} incrementVoteDown={incrementVoteDown} incrementVoteUp={incrementVoteUp}/>
     </main>
   );
 }
