@@ -2,24 +2,35 @@ import './App.css';
 // import searchIcon from '../icons/search.png';
 
 // Example imports (for later):
-import { useState } from 'react';
-import moviePosters from '../data/movie_posters';
-
+import { useState, useEffect } from 'react';
 import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
 
 function App() {
-  const [posters, setPosters] = useState(moviePosters)
+  const [posters, setPosters] = useState([])
   const [selectedMovie, setSelectedMovie] = useState(null)
 
+function displayPosters() {
+  fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
+  .then(response => response.json())
+  .then(data => {
+    setPosters(data)
+})
+  .catch(error => console.log(error))
+}
+
+useEffect(() => {
+  displayPosters()
+  }, [])
+
   function updateVoteCount(id, change) {
-    moviePosters.forEach(poster => {
+    posters.forEach(poster => {
       if (poster.id === id) {
         poster.vote_count += change
       }
     })
-    setPosters([...moviePosters])
+    setPosters([...posters])
   }
 
   function incrementVoteDown(id) {
@@ -44,7 +55,7 @@ function App() {
         <MovieDetails selectedMovie={selectedMovie} />
       ) : (
       <MoviesContainer 
-        moviePosters={posters} 
+        posters={posters} 
         incrementVoteDown={incrementVoteDown} 
         incrementVoteUp={incrementVoteUp}
         showMovieDetails={showMovieDetails}
