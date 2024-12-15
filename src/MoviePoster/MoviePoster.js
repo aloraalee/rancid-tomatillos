@@ -2,9 +2,9 @@ import './MoviePoster.css';
 import upvote from '../icons/upvote.png';
 import downvote from '../icons/downvote.png';
 
-function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVoteUp }) {
+function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVoteUp, showMovieDetails }) {
   return (
-    <section className="movie-poster">
+    <section className="movie-poster" onClick={() => showMovieDetails()}>
       <img src={img} alt={`Poster of ${title}`}/>
       <div className='vote-banner'>
         <button className='vote-button' onClick={() => incrementVoteUp(id)}>
@@ -18,4 +18,7 @@ function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVo
     </section>
         )}
 
+
+
+        
 export default MoviePoster;

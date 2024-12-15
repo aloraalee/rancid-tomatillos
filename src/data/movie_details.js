@@ -1,3 +1,5 @@
+// import "./MovieDetails/MovieDetails.css"
+
 const movieDetails = {
   "backdrop_path": "https://image.tmdb.org/t/p/original//m4TUa2ciEWSlk37rOsjiSIvZDXE.jpg",
   "genre_ids": [
@@ -13,5 +15,8 @@ const movieDetails = {
   "release_date": "2001-07-20",
   "title": "Spirited Away",
 };
+
+
+
 
 export default movieDetails;
