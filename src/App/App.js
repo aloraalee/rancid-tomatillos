@@ -5,11 +5,13 @@ import './App.css';
 import { useState } from 'react';
 import moviePosters from '../data/movie_posters';
 
-// import movieDetails from '../data/movie_details';
+import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MovieDetails from '../MovieDetails/MovieDetails';
 
 function App() {
   const [posters, setPosters] = useState(moviePosters)
+  const [selectedMovie, setSelectedMovie] = useState(null)
 
   function updateVoteCount(id, change) {
     moviePosters.forEach(poster => {
@@ -28,15 +30,26 @@ function App() {
     updateVoteCount(id, 1)
     }
 
+  function showMovieDetails() {
+    setSelectedMovie(movieDetails)
+      console.log('selected movie', selectedMovie)
+  }
+
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
       </header>
+      {selectedMovie ? (
+        <MovieDetails selectedMovie={selectedMovie} />
+      ) : (
       <MoviesContainer 
         moviePosters={posters} 
         incrementVoteDown={incrementVoteDown} 
-        incrementVoteUp={incrementVoteUp}/>
+        incrementVoteUp={incrementVoteUp}
+        showMovieDetails={showMovieDetails}
+        />
+      )}
     </main>
   );
 }
