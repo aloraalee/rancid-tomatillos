@@ -9,14 +9,34 @@ import moviePosters from '../data/movie_posters';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 
 function App() {
-  const [posters] = useState(moviePosters)
+  const [posters, setPosters] = useState(moviePosters)
+
+  function updateVoteCount(id, change) {
+    moviePosters.forEach(poster => {
+      if (poster.id === id) {
+        poster.vote_count += change
+      }
+    })
+    setPosters([...moviePosters])
+  }
+
+  function incrementVoteDown(id) {
+    updateVoteCount(id, -1)
+  }
+
+  function incrementVoteUp(id) {
+    updateVoteCount(id, 1)
+    }
 
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
       </header>
-      <MoviesContainer moviePosters={posters}/>
+      <MoviesContainer 
+        moviePosters={posters} 
+        incrementVoteDown={incrementVoteDown} 
+        incrementVoteUp={incrementVoteUp}/>
     </main>
   );
 }
