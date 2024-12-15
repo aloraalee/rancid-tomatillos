@@ -1,11 +1,11 @@
 import MoviePoster from '../MoviePoster/MoviePoster';
 import './MoviesContainer.css';
 
-function MoviesContainer({moviePosters, incrementVoteDown, incrementVoteUp, showMovieDetails}) {
+function MoviesContainer({posters, incrementVoteDown, incrementVoteUp, showMovieDetails}) {
 
   return (
     <section className="movies-container">
-      {moviePosters.map(poster => (
+      {posters.map(poster => (
         <MoviePoster
           key={poster.id}
           img={poster.poster_path}
