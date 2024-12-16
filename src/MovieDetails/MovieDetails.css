@@ -3,6 +3,16 @@
   align-items: center;
 }
 
+.home {
+  max-width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+button {
+  background-color: transparent; /* Make background transparent */
+}
+
 h2 {
   font-size: xxx-large;
 }
