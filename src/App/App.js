@@ -11,12 +11,13 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null)
 
 function displayPosters() {
-  fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
-  .then(response => response.json())
-  .then(data => {
-    setPosters(data)
-})
-  .catch(error => console.log(error))
+  setSelectedMovie(null);
+    fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
+    .then(response => response.json())
+    .then(data => {
+      setPosters(data)
+  })
+    .catch(error => console.log(error))
 }
 
 useEffect(() => {
@@ -49,17 +50,16 @@ useEffect(() => {
     .catch(error => console.log(error))
   }
 
-  // useEffect(() => {
-  //   showMovieDetails()
-  //   }, [])
-
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
       </header>
       {selectedMovie ? (
-        <MovieDetails selectedMovie={selectedMovie} />
+        <MovieDetails 
+        selectedMovie={selectedMovie} 
+        displayPosters={displayPosters} 
+        />
       ) : (
       <MoviesContainer 
         posters={posters} 
