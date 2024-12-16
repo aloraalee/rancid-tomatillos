@@ -5,7 +5,7 @@ import downvote from '../icons/downvote.png';
 function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVoteUp, showMovieDetails }) {
   return (
     <section className="movie-poster">
-      <img src={img} alt={`Poster of ${title}`} onClick={() => showMovieDetails()}/>
+      <img src={img} alt={`Poster of ${title}`} onClick={() => showMovieDetails(id)}/>
       <div className='vote-banner'>
         <button className='vote-button' onClick={() => incrementVoteUp(id)}>
           <img className='upvote' src={upvote} alt="Up vote button" />

@@ -3,7 +3,6 @@ import './App.css';
 
 // Example imports (for later):
 import { useState, useEffect } from 'react';
-import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
 
@@ -12,12 +11,13 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null)
 
 function displayPosters() {
-  fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
-  .then(response => response.json())
-  .then(data => {
-    setPosters(data)
-})
-  .catch(error => console.log(error))
+  setSelectedMovie(null);
+    fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
+    .then(response => response.json())
+    .then(data => {
+      setPosters(data)
+  })
+    .catch(error => console.log(error))
 }
 
 useEffect(() => {
@@ -41,8 +41,13 @@ useEffect(() => {
     updateVoteCount(id, 1)
     }
 
-  function showMovieDetails() {
-    setSelectedMovie(movieDetails)
+  function showMovieDetails(id) {
+    fetch(`https://rancid-tomatillos-api.onrender.com/api/v1/movies/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      setSelectedMovie(data)
+    })
+    .catch(error => console.log(error))
   }
 
   return (
@@ -51,7 +56,10 @@ useEffect(() => {
         <h1>rancid tomatillos</h1>
       </header>
       {selectedMovie ? (
-        <MovieDetails selectedMovie={selectedMovie} />
+        <MovieDetails 
+        selectedMovie={selectedMovie} 
+        displayPosters={displayPosters} 
+        />
       ) : (
       <MoviesContainer 
         posters={posters} 
