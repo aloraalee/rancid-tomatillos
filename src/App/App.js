@@ -3,7 +3,6 @@ import './App.css';
 
 // Example imports (for later):
 import { useState, useEffect } from 'react';
-import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
 
@@ -41,9 +40,18 @@ useEffect(() => {
     updateVoteCount(id, 1)
     }
 
-  function showMovieDetails() {
-    setSelectedMovie(movieDetails)
+  function showMovieDetails(id) {
+    fetch(`https://rancid-tomatillos-api.onrender.com/api/v1/movies/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      setSelectedMovie(data)
+    })
+    .catch(error => console.log(error))
   }
+
+  // useEffect(() => {
+  //   showMovieDetails()
+  //   }, [])
 
   return (
     <main className='App'>
