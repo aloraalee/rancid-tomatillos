@@ -43,7 +43,6 @@ useEffect(() => {
 
   function showMovieDetails() {
     setSelectedMovie(movieDetails)
-      console.log('selected movie', selectedMovie)
   }
 
   return (
