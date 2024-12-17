@@ -3,6 +3,11 @@
   align-items: center;
 }
 
+.home-btn {
+  display: block;
+  align-items: flex-end;
+}
+
 .home {
   max-width: 20px;
   height: 20px;

@@ -1,14 +1,16 @@
 import './App.css';
 // import searchIcon from '../icons/search.png';
-
+import home from '../icons/home.png';
 // Example imports (for later):
 import { useState, useEffect } from 'react';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const [posters, setPosters] = useState([])
   const [selectedMovie, setSelectedMovie] = useState(null)
+  const location = useLocation();
 
 function displayPosters() {
   setSelectedMovie(null);
@@ -67,6 +69,9 @@ useEffect(() => {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
+        {location.pathname !== '/' && <button className='home-btn' onClick={() => displayPosters()}>
+          <img className='home' src={home} alt="Home button"/>
+       </button>}
       </header>
       {selectedMovie ? (
         <MovieDetails 
