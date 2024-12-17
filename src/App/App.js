@@ -1,10 +1,8 @@
 import './App.css';
-// import searchIcon from '../icons/search.png';
-
-// Example imports (for later):
 import { useState, useEffect } from 'react';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   const [posters, setPosters] = useState([])
@@ -54,33 +52,18 @@ useEffect(() => {
     updateVoteCount(id, "up")
     }
 
-  function showMovieDetails(id) {
-    fetch(`https://rancid-tomatillos-api.onrender.com/api/v1/movies/${id}`)
-    .then(response => response.json())
-    .then(data => {
-      setSelectedMovie(data)
-    })
-    .catch(error => console.log(error))
-  }
-
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
       </header>
-      {selectedMovie ? (
-        <MovieDetails 
-        selectedMovie={selectedMovie} 
-        displayPosters={displayPosters} 
-        />
-      ) : (
-      <MoviesContainer 
-        posters={posters} 
-        incrementVoteDown={incrementVoteDown} 
-        incrementVoteUp={incrementVoteUp}
-        showMovieDetails={showMovieDetails}
-        />
-      )}
+      <Routes>
+        <Route path='/' element={<MoviesContainer posters={posters} 
+          incrementVoteDown={incrementVoteDown} 
+          incrementVoteUp={incrementVoteUp}/>}/>
+        <Route path='/:id' element={<MovieDetails
+          displayPosters={displayPosters} />}/>
+      </Routes>
     </main>
   );
 }
