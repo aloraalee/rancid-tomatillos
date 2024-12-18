@@ -5,10 +5,15 @@
   overflow: hidden;
 }
 
+.movie-poster:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+
 .movie-poster img {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 20px 20px 0px 0px;
 }
 
 .vote-banner {
