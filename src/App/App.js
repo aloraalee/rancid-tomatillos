@@ -1,4 +1,5 @@
 import './App.css';
+<<<<<<< HEAD
 // import searchIcon from '../icons/search.png';
 import home from '../icons/home.png';
 // Example imports (for later):
@@ -11,15 +12,24 @@ function App() {
   const [posters, setPosters] = useState([])
   const [selectedMovie, setSelectedMovie] = useState(null)
   const location = useLocation();
+=======
+import { useState, useEffect } from 'react';
+import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MovieDetails from '../MovieDetails/MovieDetails';
+import { Routes, Route } from 'react-router-dom'
+
+function App() {
+  const [posters, setPosters] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+>>>>>>> 206bff0a4040cfb70fd40b4de63fc428c0c3b3ae
 
 function displayPosters() {
-  setSelectedMovie(null);
-    fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
-    .then(response => response.json())
-    .then(data => {
-      setPosters(data)
+  fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
+  .then(response => response.json())
+  .then(data => {
+    setPosters(data)
   })
-    .catch(error => console.log(error))
+  .catch(error => console.log(error))
 }
 
 useEffect(() => {
@@ -56,36 +66,34 @@ useEffect(() => {
     updateVoteCount(id, "up")
     }
 
-  function showMovieDetails(id) {
-    fetch(`https://rancid-tomatillos-api.onrender.com/api/v1/movies/${id}`)
-    .then(response => response.json())
-    .then(data => {
-      setSelectedMovie(data)
-    })
-    .catch(error => console.log(error))
-  }
+  const filteredPosters = posters.filter((poster => 
+    poster.title.toLowerCase().includes(searchQuery.toLowerCase())
+))
 
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
+<<<<<<< HEAD
         {location.pathname !== '/' && <button className='home-btn' onClick={() => displayPosters()}>
           <img className='home' src={home} alt="Home button"/>
        </button>}
+=======
+        <input className='search'
+          type="text"
+          placeholder="Search for a movie"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
+>>>>>>> 206bff0a4040cfb70fd40b4de63fc428c0c3b3ae
       </header>
-      {selectedMovie ? (
-        <MovieDetails 
-        selectedMovie={selectedMovie} 
-        displayPosters={displayPosters} 
-        />
-      ) : (
-      <MoviesContainer 
-        posters={posters} 
-        incrementVoteDown={incrementVoteDown} 
-        incrementVoteUp={incrementVoteUp}
-        showMovieDetails={showMovieDetails}
-        />
-      )}
+      <Routes>
+        <Route path='/' element={<MoviesContainer posters={filteredPosters} 
+          incrementVoteDown={incrementVoteDown} 
+          incrementVoteUp={incrementVoteUp}/>}/>
+        <Route path='/:id' element={<MovieDetails
+          displayPosters={displayPosters} />}/>
+      </Routes>
     </main>
   );
 }

@@ -1,11 +1,17 @@
 import './MoviePoster.css';
 import upvote from '../icons/upvote.png';
 import downvote from '../icons/downvote.png';
+import { Link } from 'react-router-dom'
 
-function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVoteUp, showMovieDetails }) {
+
+function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVoteUp }) {
+
   return (
     <section className="movie-poster">
-      <img src={img} alt={`Poster of ${title}`} onClick={() => showMovieDetails(id)}/>
+      <Link to={`/${id}`}>
+        <img src={img} alt={`Poster of ${title}`} />
+      </Link>
+      
       <div className='vote-banner'>
         <button className='vote-button' onClick={() => incrementVoteUp(id)}>
           <img className='upvote' src={upvote} alt="Up vote button" />
@@ -17,8 +23,5 @@ function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVo
       </div>
     </section>
         )}
-
-
-
         
 export default MoviePoster;

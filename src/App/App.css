@@ -10,7 +10,7 @@ body {
 
 header {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   padding: 25px;
 }
@@ -23,6 +23,17 @@ h1 {
   color: white;
   font-size: 56px;
   letter-spacing: 5px;
+}
+
+.search {
+  padding: 10px;
+  width: 25%;
+  max-width: 400px;
+  margin-right: 100px;
+}
+
+.hidden {
+  display: none;
 }
 
 p {

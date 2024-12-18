@@ -1,20 +1,41 @@
 import './MovieDetails.css';
 import home from '../icons/home.png';
+import { useParams, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+// import { showMovieDetails } from '../App/App'
 
-function MovieDetails({ displayPosters, selectedMovie}) {
+function MovieDetails({ displayPosters }) {
+  const movieId = useParams().id
+  const [movie, setMovie] = useState(null) 
+
+  useEffect(() => {
+    fetch(`https://rancid-tomatillos-api.onrender.com/api/v1/movies/${movieId}`)
+    .then(response => response.json())
+    .then(data => {
+      setMovie(data)
+    })
+    .catch(error => console.log(error))
+  }, [movieId])
+
+  if (!movie) {
+    return <p>Loading...</p>
+  }
+
   return (
-    <section className='movie-details'>
-       {/* <button className='home-btn' onClick={() => displayPosters()}>
-       <img className='home' src={home} alt="Home button"/>
-       </button> */}
-      <img src={selectedMovie.backdrop_path} alt={`Movie details for ${selectedMovie.title}`}/>
-      <h2>{selectedMovie.title}</h2>
+    <section className='movie-details' >
+      <Link to={'/'}>
+        <button className='home-btn'>
+        <img className='home' src={home} alt="Home button"/>
+        </button>
+      </Link>
+      <img src={movie.backdrop_path} alt={`Movie details for ${movie.title}`}/>
+      <h2>{movie.title}</h2>
       <div className='genre'>
-        {selectedMovie.genre_ids.map((genre, index) => (
+        {movie.genre_ids.map((genre, index) => (
           <span key={index}>{genre}</span>
         ))}
       </div>
-      <p>{selectedMovie.overview}</p>
+      <p>{movie.overview}</p>
     </section>
   );
 }
