@@ -15,8 +15,12 @@ header {
   padding: 25px;
 }
 
-.home-btn {
+.hide-home-btn {
   display: none
+}
+
+.show-home-btn {
+  display: block;
 }
 
 h1 {
