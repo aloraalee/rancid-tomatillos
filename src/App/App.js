@@ -6,16 +6,15 @@ import { Routes, Route } from 'react-router-dom'
 
 function App() {
   const [posters, setPosters] = useState([])
-  const [selectedMovie, setSelectedMovie] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
 function displayPosters() {
-  setSelectedMovie(null);
-    fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
-    .then(response => response.json())
-    .then(data => {
-      setPosters(data)
+  fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
+  .then(response => response.json())
+  .then(data => {
+    setPosters(data)
   })
-    .catch(error => console.log(error))
+  .catch(error => console.log(error))
 }
 
 useEffect(() => {
@@ -52,13 +51,23 @@ useEffect(() => {
     updateVoteCount(id, "up")
     }
 
+  const filteredPosters = posters.filter((poster => 
+    poster.title.toLowerCase().includes(searchQuery.toLowerCase())
+))
+
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
+        <input className='search'
+          type="text"
+          placeholder="Search for a movie"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
       </header>
       <Routes>
-        <Route path='/' element={<MoviesContainer posters={posters} 
+        <Route path='/' element={<MoviesContainer posters={filteredPosters} 
           incrementVoteDown={incrementVoteDown} 
           incrementVoteUp={incrementVoteUp}/>}/>
         <Route path='/:id' element={<MovieDetails
