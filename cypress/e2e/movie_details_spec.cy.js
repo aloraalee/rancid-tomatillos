@@ -1,8 +1,14 @@
 describe('movie details spec', () => {
   beforeEach(() => {
-    cy.intercept("GET", "http://localhost:3001/api/v1/movies/389"), {
-      statusCode: 200
-    }
+    cy.intercept('https://rancid-tomatillos-api.onrender.com/api/v1/movies', {
+      statusCode: 200,
+      fixture: "movie_posters"
+    })
+
+    cy.intercept("GET", 'https://rancid-tomatillos-api.onrender.com/api/v1/movies/*', {
+      statusCode: 200,
+      fixture: "movie_details"
+    }).as('getMovieDetails')
     cy.visit('http://localhost:3000/')
   })
 
@@ -12,14 +18,19 @@ describe('movie details spec', () => {
 
   it('displays movie details on page load', () => {
     cy.get(".movie-poster").first().click()
-    cy.get('h2').contains('12 Angry Men')
-    cy.get('.genre').contains('Drama')
-    cy.get('p').contains("The defense and the prosecution have rested and the jury is filing into the jury room to decide if a young Spanish-American is guilty or innocent of murdering his father. What begins as an open and shut case soon becomes a mini-drama of each of the jurors' prejudices and preconceptions about the trial, the accused, and each other.")
+    cy.wait('@getMovieDetails')
+    cy.get('h2').contains('The Dark Knight')
+    cy.get('.genre').contains("Drama")
+    cy.get('.genre').contains("Action")
+    cy.get('.genre').contains("Crime")
+    cy.get('.genre').contains("Thriller")
+    cy.get('p').contains("Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.")
   })
 
-  // it('displays a home button', () => {
-  //   // cy.get('.home').find('img').should('have.class', 'home')
-  //   // cy.get('.home-btn').find('img').should('have.attr', 'alt', 'Home button')  
-  //   // cy.get('.home-btn').contains('Home button')  
-  // })
+  it('displays a home button', () => {
+    cy.get(".movie-poster").first().click()
+    cy.wait('@getMovieDetails')
+    cy.get('button').should('have.class', 'home-btn')
+    cy.get('.home-btn').find('img').should('have.attr', 'alt', 'Home button')  
+  })
 })
