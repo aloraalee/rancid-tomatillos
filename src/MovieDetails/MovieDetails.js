@@ -12,7 +12,11 @@ function MovieDetails() {
     .then(data => {
       setMovie(data)
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.error('Error fetching movie details:', error)
+      setMovie(null)
+      alert('Failed to fetch movie details. Please try again later.')
+    })
   }, [movieId])
 
   if (!movie) {
@@ -21,14 +25,16 @@ function MovieDetails() {
 
   return (
     <section className='movie-details' >
-      <img src={movie.backdrop_path} alt={`Movie details for ${movie.title}`}/>
-      <h2>{movie.title}</h2>
-      <div className='genre'>
-        {movie.genre_ids.map((genre, index) => (
-          <span key={index}>{genre}</span>
-        ))}
-      </div>
-      <p>{movie.overview}</p>
+      <article> 
+        <img src={movie.backdrop_path} alt={`Movie details for ${movie.title}`}/>
+        <h2>{movie.title}</h2>
+        <div className='genre'>
+          {movie.genre_ids.map((genre, index) => (
+            <span key={index}>{genre}</span>
+          ))}
+        </div>
+        <p>{movie.overview}</p>
+      </article>
     </section>
   );
 }
