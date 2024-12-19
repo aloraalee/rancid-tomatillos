@@ -15,14 +15,6 @@ header {
   padding: 25px;
 }
 
-.hide-home-btn {
-  display: none
-}
-
-.show-home-btn {
-  display: block;
-}
-
 .show-search-bar {
   padding: 15px;
   width: 100%;
