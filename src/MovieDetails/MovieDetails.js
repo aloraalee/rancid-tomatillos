@@ -21,14 +21,16 @@ function MovieDetails() {
 
   return (
     <section className='movie-details' >
-      <img src={movie.backdrop_path} alt={`Movie details for ${movie.title}`}/>
-      <h2>{movie.title}</h2>
-      <div className='genre'>
-        {movie.genre_ids.map((genre, index) => (
-          <span key={index}>{genre}</span>
-        ))}
-      </div>
-      <p>{movie.overview}</p>
+      <article> 
+        <img src={movie.backdrop_path} alt={`Movie details for ${movie.title}`}/>
+        <h2>{movie.title}</h2>
+        <div className='genre'>
+          {movie.genre_ids.map((genre, index) => (
+            <span key={index}>{genre}</span>
+          ))}
+        </div>
+        <p>{movie.overview}</p>
+      </article>
     </section>
   );
 }
