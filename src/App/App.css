@@ -15,6 +15,14 @@ header {
   padding: 25px;
 }
 
+.hide-home-btn {
+  display: none
+}
+
+.show-home-btn {
+  display: block;
+}
+
 h1 {
   color: white;
   font-size: 56px;

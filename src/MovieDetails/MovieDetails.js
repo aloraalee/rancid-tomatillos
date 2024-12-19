@@ -1,10 +1,9 @@
 import './MovieDetails.css';
 import home from '../icons/home.png';
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-// import { showMovieDetails } from '../App/App'
 
-function MovieDetails({ displayPosters }) {
+function MovieDetails({ }) {
   const movieId = useParams().id
   const [movie, setMovie] = useState(null) 
 
@@ -23,11 +22,6 @@ function MovieDetails({ displayPosters }) {
 
   return (
     <section className='movie-details' >
-      <Link to={'/'}>
-        <button className='home-btn'>
-        <img className='home' src={home} alt="Home button"/>
-        </button>
-      </Link>
       <img src={movie.backdrop_path} alt={`Movie details for ${movie.title}`}/>
       <h2>{movie.title}</h2>
       <div className='genre'>

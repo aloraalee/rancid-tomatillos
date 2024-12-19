@@ -2,11 +2,25 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
+import home from '../icons/home.png';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const [posters, setPosters] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
+  const [displayHomeBtn, setHomeBtn] = useState('hide-home-btn')
+  const location = useLocation()
+
+function changeHomeBtn() {
+  setHomeBtn('show-home-btn')
+  }
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setHomeBtn('hide-home-btn');
+    }
+  }, [location]);
 
 function displayPosters() {
   fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
@@ -65,11 +79,17 @@ useEffect(() => {
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
         />
+      <Link to={'/'}>
+        <button className={displayHomeBtn}>
+        <img className='home' src={home} alt="Home button"/>
+        </button>
+      </Link>
       </header>
       <Routes>
         <Route path='/' element={<MoviesContainer posters={filteredPosters} 
           incrementVoteDown={incrementVoteDown} 
-          incrementVoteUp={incrementVoteUp}/>}/>
+          incrementVoteUp={incrementVoteUp}
+          changeHomeBtn={changeHomeBtn}/>}/>
         <Route path='/:id' element={<MovieDetails
           displayPosters={displayPosters} />}/>
       </Routes>
