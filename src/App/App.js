@@ -12,7 +12,8 @@ function App() {
   const [displayHomeBtn, setHomeBtn] = useState('hide-home-btn')
   const [displaySearchBar, setSearchBar] = useState('show-search-bar')
   const location = useLocation()
-
+  const [error, setError] = useState(null)
+  
 function changeHomeBtn() {
   setHomeBtn('show-home-btn')
   }
@@ -26,22 +27,27 @@ useEffect(() => {
   } 
 }, [location]);
 
-function displayPosters() {
+
+useEffect(() => {
   fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch movies')
+    }
+    return response.json()
+  })
   .then(data => {
     setPosters(data || [])
   })
   .catch(error => {
     console.error('Error fetching movies:', error)
-    setPosters([])
-    alert('Failed to fetch movies. Please try again later.')
+    setError('Failed to fetch movies. Please try again later.')
   })
-}
-
-useEffect(() => {
-  displayPosters()
   }, [])
+
+  if (error) {
+    return <div>{error}</div>
+  }
 
   function updateVoteCount(id, direction) {
     fetch(`https://rancid-tomatillos-api.onrender.com/api/v1/movies/${id}`, {
@@ -63,7 +69,6 @@ useEffect(() => {
       })
       .catch(error => {
         console.error('Error fetching movies:', error)
-        setPosters([])
         alert('Failed to fetch movies. Please try again later.')
       })
     } 
@@ -102,8 +107,7 @@ useEffect(() => {
           incrementVoteDown={incrementVoteDown} 
           incrementVoteUp={incrementVoteUp}
           changeHomeBtn={changeHomeBtn}/>}/>
-        <Route path='/:id' element={<MovieDetails
-          displayPosters={displayPosters} />}/>
+        <Route path='/:id' element={<MovieDetails/>} />
       </Routes>
     </main>
   );
