@@ -26,9 +26,13 @@ function displayPosters() {
   fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
   .then(response => response.json())
   .then(data => {
-    setPosters(data)
+    setPosters(data || [])
   })
-  .catch(error => console.log(error))
+  .catch(error => {
+    console.error('Error fetching movies:', error)
+    setPosters([])
+    alert('Failed to fetch movies. Please try again later.')
+  })
 }
 
 useEffect(() => {
@@ -36,7 +40,6 @@ useEffect(() => {
   }, [])
 
   function updateVoteCount(id, direction) {
-    console.log(id)
     fetch(`https://rancid-tomatillos-api.onrender.com/api/v1/movies/${id}`, {
       method: "PATCH", 
       body: JSON.stringify({vote_direction: direction}),
@@ -54,7 +57,11 @@ useEffect(() => {
           )
         )
       })
-      .catch((error) => console.log(error))
+      .catch(error => {
+        console.error('Error fetching movies:', error)
+        setPosters([])
+        alert('Failed to fetch movies. Please try again later.')
+      })
     } 
 
   function incrementVoteDown(id) {
@@ -65,9 +72,10 @@ useEffect(() => {
     updateVoteCount(id, "up")
     }
 
-  const filteredPosters = posters.filter((poster => 
-    poster.title.toLowerCase().includes(searchQuery.toLowerCase())
-))
+  const filteredPosters = Array.isArray(posters)
+    ? posters.filter((poster) =>
+        poster.title.toLowerCase().includes(searchQuery.toLowerCase())
+    ) : []
 
   return (
     <main className='App'>
