@@ -10,17 +10,21 @@ function App() {
   const [posters, setPosters] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
   const [displayHomeBtn, setHomeBtn] = useState('hide-home-btn')
+  const [displaySearchBar, setSearchBar] = useState('show-search-bar')
   const location = useLocation()
 
 function changeHomeBtn() {
   setHomeBtn('show-home-btn')
   }
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      setHomeBtn('hide-home-btn');
-    }
-  }, [location]);
+useEffect(() => {
+  if (location.pathname === '/') {
+    setHomeBtn('hide-home-btn');
+    setSearchBar('show-search-bar')
+  } else {
+    setSearchBar('hide-search-bar')
+  } 
+}, [location]);
 
 function displayPosters() {
   fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
@@ -77,11 +81,11 @@ useEffect(() => {
         poster.title.toLowerCase().includes(searchQuery.toLowerCase())
     ) : []
 
-  return (
+    return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
-        <input className='search'
+        <input className={displaySearchBar}
           type="text"
           placeholder="Search for a movie"
           value={searchQuery}
