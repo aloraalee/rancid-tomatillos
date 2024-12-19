@@ -9,19 +9,9 @@ import { useLocation } from 'react-router-dom';
 function App() {
   const [posters, setPosters] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
-  const [displaySearchBar, setSearchBar] = useState('show-search-bar')
   const location = useLocation()
   const [error, setError] = useState(null)
   
-useEffect(() => {
-  if (location.pathname === '/') {
-    setSearchBar('show-search-bar')
-  } else {
-    setSearchBar('hide-search-bar')
-  } 
-}, [location]);
-
-
 useEffect(() => {
   fetch("https://rancid-tomatillos-api.onrender.com/api/v1/movies")
   .then(response => {
@@ -91,13 +81,14 @@ useEffect(() => {
             </button>
           </Link>
         )}
-        <input className={displaySearchBar}
-          type="text"
-          placeholder="Search for a movie"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-        />
-      
+        {location.pathname==='/' && (
+          <input className='search-bar'
+            type="text"
+            placeholder="Search for a movie"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
+        )}
       </header>
       <Routes>
         <Route path='/' element={<MoviesContainer posters={filteredPosters} 
