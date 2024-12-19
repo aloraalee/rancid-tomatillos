@@ -96,7 +96,7 @@ useEffect(() => {
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
         />
-      <Link to={'/'}>
+      <Link to={'/'} aria-label="Return to homepage">
         <button className={displayHomeBtn}>
         <img className='home' src={home} alt="Home button"/>
         </button>
