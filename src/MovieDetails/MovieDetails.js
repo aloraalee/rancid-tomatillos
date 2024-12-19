@@ -14,13 +14,16 @@ function MovieDetails() {
     })
     .catch(error => {
       console.error('Error fetching movie details:', error)
-      setMovie(null)
-      alert('Failed to fetch movie details. Please try again later.')
+      setMovie({error: true})
     })
-  }, [movieId])
+    }, [movieId])
 
   if (!movie) {
     return <p>Loading...</p>
+  }
+
+  if(movie.error) {
+    return <h2>404 - Page or Movie Not Found</h2>
   }
 
   return (

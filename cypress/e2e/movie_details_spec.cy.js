@@ -15,11 +15,11 @@ describe('movie details spec', () => {
     cy.intercept("GET", 'https://rancid-tomatillos-api.onrender.com/api/v1/movies/155', {
       statusCode: 200,
       fixture: "movie_details_155"
-    })
+    }).as('getMovieDetails')
     cy.visit('http://localhost:3000/')
 
     cy.get(".movie-poster").first().click()
-    cy.wait
+    cy.wait('@getMovieDetails')
     cy.get('h2').contains('The Dark Knight')
     cy.get('.genre').contains("Drama")
     cy.get('.genre').contains("Action")
@@ -32,12 +32,12 @@ describe('movie details spec', () => {
     cy.intercept("GET", 'https://rancid-tomatillos-api.onrender.com/api/v1/movies/680', {
       statusCode: 200,
       fixture: "movie_details_680"
-    })
+    }).as('getMovieDetails')
     cy.visit('http://localhost:3000/')
 
 
     cy.get(".movie-poster").last().click()
-    cy.wait
+    cy.wait('@getMovieDetails')
     cy.get('h2').contains('Pulp Fiction')
     cy.get('.genre').contains("Thriller")
     cy.get('.genre').contains("Crime")
