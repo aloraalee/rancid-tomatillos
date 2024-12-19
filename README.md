@@ -37,10 +37,12 @@ Our most significant challenge was implementing the home button functionality:
 - Required conditional rendering to hide the button on the home page.
 - Initially attempted using state management and CSS styling with an onClick method.
 After several iterations, we arrived at a simple and elegant solution using conditional rendering:
+```
 {location.pathname !== '/' && (
   <Link to="/">
     {/* Home button content */}
   </Link>
-)}
+)} 
+```
 This challenge became a major win as the refactoring process significantly simplified our code, making it more maintainable and easier to understand.
 
