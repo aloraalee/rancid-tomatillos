@@ -54,8 +54,7 @@ describe('movie details spec', () => {
 
     cy.get(".movie-poster").first().click()
     cy.wait
-    cy.get('button').should('have.class', 'show-home-btn')
-    cy.get('.show-home-btn').find('img').should('have.attr', 'alt', 'Home button')  
+    cy.get('button').find('img').should('have.attr', 'alt', 'Home button')  
   })
 
   it('displays an alert when the API call fails', () => {
