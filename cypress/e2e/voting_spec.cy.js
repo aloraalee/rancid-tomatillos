@@ -3,7 +3,7 @@ describe('Voting', () => {
     cy.intercept('https://rancid-tomatillos-api.onrender.com/api/v1/movies', {
       statusCode: 200,
       fixture: "movie_posters"
-    })
+    }).as('getMoviesSuccess')
 
     cy.visit('http://localhost:3000/')
   })
@@ -29,6 +29,7 @@ describe('Voting', () => {
       }
     })
 
+    cy.wait('@getMoviesSuccess')
     cy.get('.movie-poster').first().find('.vote-button').first().click()
     cy.get('.movie-poster').first().find('p').should('contain', 32545)
     cy.get('.movie-poster').last().find('.vote-button').first().click()
@@ -56,10 +57,45 @@ describe('Voting', () => {
       }
     })
 
+    cy.wait('@getMoviesSuccess')
     cy.get('.movie-poster').first().find('.vote-button').last().click()
     cy.get('.movie-poster').first().find('p').should('contain', 32543)
     cy.get('.movie-poster').last().find('.vote-button').last().click()
     cy.get('.movie-poster').last().find('p').should('contain', 27641)
+  })
+
+  describe('sad path', () => {
+    beforeEach(() => {
+      cy.intercept('https://rancid-tomatillos-api.onrender.com/api/v1/movies', {
+        statusCode: 200,
+        fixture: "movie_posters"
+      }).as('getMoviesSuccess')
+  
+      cy.visit('http://localhost:3000/')
+
+      cy.intercept('PATCH', 'https://rancid-tomatillos-api.onrender.com/api/v1/movies/155', {
+        statusCode: 500,
+        body: { movies: [] }
+      }).as('patchMovieError')
+    })
+
+    it('displays an alert when the upvote patch request fails', () => {
+      cy.wait('@getMoviesSuccess')
+      cy.get('.movie-poster').first().find('.vote-button').first().click()
+      cy.wait('@patchMovieError')
+      cy.on('window:alert', (alertText) => {
+        expect(alertText).to.contains('Failed to fetch movies. Please try again later.')
+      })
+    })
+
+    it('displays an alert when the downvote patch request fails', () => {
+      cy.wait('@getMoviesSuccess')
+      cy.get('.movie-poster').first().find('.vote-button').last().click()
+      cy.wait('@patchMovieError')
+      cy.on('window:alert', (alertText) => {
+        expect(alertText).to.contains('Failed to fetch movies. Please try again later.')
+      })
+    })
   })
 })
 

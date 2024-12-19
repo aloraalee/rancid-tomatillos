@@ -1,9 +1,8 @@
 import './MovieDetails.css';
-import home from '../icons/home.png';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
-function MovieDetails({ }) {
+function MovieDetails() {
   const movieId = useParams().id
   const [movie, setMovie] = useState(null) 
 

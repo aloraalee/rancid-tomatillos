@@ -8,6 +8,10 @@
   align-items: flex-end;
 }
 
+.hide-search-bar {
+  display: none;
+}
+
 .home {
   max-width: 20px;
   height: 20px;
