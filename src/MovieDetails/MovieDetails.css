@@ -8,11 +8,6 @@ article {
   height: 775px;
 }
 
-.show-home-btn {
-  display: block;
-  background-color: transparent; 
-}
-
 .hide-search-bar {
   display: none;
 }
