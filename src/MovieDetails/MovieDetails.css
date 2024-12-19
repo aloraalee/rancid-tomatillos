@@ -12,6 +12,10 @@ article {
   display: none;
 }
 
+button {
+  background-color: transparent; 
+}
+
 .home {
   max-width: 56px;
   height: 56px;

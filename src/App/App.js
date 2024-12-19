@@ -75,7 +75,7 @@ useEffect(() => {
       <header>
         <h1>rancid tomatillos</h1>
         {location.pathname!== '/' && (
-          <Link to={'/'}>
+          <Link to={'/'} aria-label="Return to homepage">
             <button className='home-button'>
             <img className='home' src={home} alt="Home button"/>
             </button>
