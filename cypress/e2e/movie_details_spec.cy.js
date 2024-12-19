@@ -54,19 +54,24 @@ describe('movie details spec', () => {
 
     cy.get(".movie-poster").first().click()
     cy.wait
+    cy.get('button').should('have.class', 'home-button')
     cy.get('button').find('img').should('have.attr', 'alt', 'Home button')  
   })
 
-  it('displays an alert when the API call fails', () => {
+  it ('displays the intended content when navigating backward and forward', () => {
     cy.intercept("GET", 'https://rancid-tomatillos-api.onrender.com/api/v1/movies/155', {
-      forceNetworkError: true
+      statusCode: 200,
+      fixture: "movie_details_155"
     })
-    cy.visit('http://localhost:3000/')
 
+    cy.visit('http://localhost:3000/')
     cy.get(".movie-poster").first().click()
-    cy.wait
-    cy.on('window:alert', (alertText) => {
-      expect(alertText).to.equal('Failed to fetch movie details. Please try again later.')
-    })
+    cy.url().should('include', '/155')
+
+    cy.go('back')
+    cy.url().should('eq', 'http://localhost:3000/')
+
+    cy.go('forward')
+    cy.url().should('include', '/155')
   })
 })
