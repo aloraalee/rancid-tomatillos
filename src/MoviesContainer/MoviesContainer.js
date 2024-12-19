@@ -1,7 +1,7 @@
 import MoviePoster from '../MoviePoster/MoviePoster';
 import './MoviesContainer.css';
 
-function MoviesContainer({posters, incrementVoteDown, incrementVoteUp, changeHomeBtn }) {
+function MoviesContainer({posters, incrementVoteDown, incrementVoteUp }) {
 
   return (
     <section className="movies-container">
@@ -13,8 +13,7 @@ function MoviesContainer({posters, incrementVoteDown, incrementVoteUp, changeHom
             voteCount={poster.vote_count}
             id={poster.id}
             incrementVoteDown={incrementVoteDown}
-            incrementVoteUp={incrementVoteUp}
-            changeHomeBtn={changeHomeBtn}/>
+            incrementVoteUp={incrementVoteUp}/>
       ))}
     </section>
   )

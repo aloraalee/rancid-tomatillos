@@ -9,18 +9,12 @@ import { useLocation } from 'react-router-dom';
 function App() {
   const [posters, setPosters] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
-  const [displayHomeBtn, setHomeBtn] = useState('hide-home-btn')
   const [displaySearchBar, setSearchBar] = useState('show-search-bar')
   const location = useLocation()
   const [error, setError] = useState(null)
   
-function changeHomeBtn() {
-  setHomeBtn('show-home-btn')
-  }
-
 useEffect(() => {
   if (location.pathname === '/') {
-    setHomeBtn('hide-home-btn');
     setSearchBar('show-search-bar')
   } else {
     setSearchBar('hide-search-bar')
@@ -90,23 +84,25 @@ useEffect(() => {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
+        {location.pathname!== '/' && (
+          <Link to={'/'} aria-label="Return to homepage">
+            <button className='home-button'>
+            <img className='home' src={home} alt="Home button"/>
+            </button>
+          </Link>
+        )}
         <input className={displaySearchBar}
           type="text"
           placeholder="Search for a movie"
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
         />
-      <Link to={'/'} aria-label="Return to homepage">
-        <button className={displayHomeBtn}>
-        <img className='home' src={home} alt="Home button"/>
-        </button>
-      </Link>
+      
       </header>
       <Routes>
         <Route path='/' element={<MoviesContainer posters={filteredPosters} 
           incrementVoteDown={incrementVoteDown} 
-          incrementVoteUp={incrementVoteUp}
-          changeHomeBtn={changeHomeBtn}/>}/>
+          incrementVoteUp={incrementVoteUp}/>}/>
         <Route path='/:id' element={<MovieDetails/>} />
       </Routes>
     </main>
