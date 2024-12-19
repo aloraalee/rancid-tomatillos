@@ -5,8 +5,8 @@
 2. Danielle Cardona - [LinkedIn](https://www.linkedin.com/in/danielle-cardona-se/), [GitHub](https://github.com/dcardona23)
 
 ## Preview
-![Rancid Tomatillos](https://github.com/aloraalee/rancid-tomatillos/blob/main/New%20Recording%20-%2012_19_2024,%203_02_04%20PM-high%20(1).gif?raw=true)
-
+![Movie Posters Live Search Preview](https://github.com/aloraalee/rancid-tomatillos/blob/main/New%20Recording%20-%2012_19_2024,%203_02_04%20PM-high%20(1).gif?raw=true)
+![Movie Details Preview](https://github.com/aloraalee/rancid-tomatillos/blob/main/New%20Recording%20-%2012_19_2024,%203_32_44%20PM-high.gif?raw=true)
 ## Abstract
 Rotten Tomatillos is an app that allows users to browse through a collection of movie posters and vote for their favorite movies. Users can view a variety of movie posters, each linked to detailed movie information. By casting their votes, users contribute to ranking the movies based on popularity. 
 
