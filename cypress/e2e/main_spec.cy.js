@@ -43,8 +43,7 @@ describe('Main Page', () => {
   describe('sad path', () => {
     beforeEach(() => {
       cy.intercept('https://rancid-tomatillos-api.onrender.com/api/v1/movies', {
-        statusCode: 500,
-        body: { movies: [] }
+        forceNetworkError: true
       }).as('getMoviesError')
 
       cy.visit('http://localhost:3000/')
@@ -54,6 +53,17 @@ describe('Main Page', () => {
       cy.wait('@getMoviesError')
       cy.on('window:alert', (alertText) => {
         expect(alertText).to.contains('Failed to fetch movies. Please try again later.')
+      })
+    })
+
+    it('displays an alert when a user navigates to an unknown route', () => {
+      cy.intercept('https://rancid-tomatillos-api.onrender.com/api/v1/movies/potatoes', {
+        forceNetworkError: true
+      }).as('getMoviesError')
+      
+      cy.wait('@getMoviesError')
+      cy.on('window:alert', (alertText) => {
+        expect(alertText).to.contains('404 - Page or Movie Not Found.')
       })
     })
   })

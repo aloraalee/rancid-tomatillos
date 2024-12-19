@@ -74,8 +74,7 @@ describe('Voting', () => {
       cy.visit('http://localhost:3000/')
 
       cy.intercept('PATCH', 'https://rancid-tomatillos-api.onrender.com/api/v1/movies/155', {
-        statusCode: 500,
-        body: { movies: [] }
+        forceNetworkError: true
       }).as('patchMovieError')
     })
 
