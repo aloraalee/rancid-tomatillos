@@ -10,6 +10,9 @@
 ## Abstract
 Rotten Tomatillos is an app that allows users to browse through a collection of movie posters and vote for their favorite movies. Users can view a variety of movie posters, each linked to detailed movie information. By casting their votes, users contribute to ranking the movies based on popularity. 
 
+## Component Architecture Plan
+![Screenshot 2024-12-11 at 8 48 41 PM](https://github.com/user-attachments/assets/372e4eed-990a-4b93-b2ec-f9a6a8cb0d70)
+
 ## Set Up
 1. Clone the repository
 2. Navigate to the project directory: cd rancid-tomatillos
