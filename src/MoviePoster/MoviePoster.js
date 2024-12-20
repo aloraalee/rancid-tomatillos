@@ -4,12 +4,12 @@ import downvote from '../icons/downvote.png';
 import { Link } from 'react-router-dom'
 
 
-function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVoteUp, changeHomeBtn }) {
+function MoviePoster({ img, title, voteCount, id, incrementVoteDown, incrementVoteUp }) {
 
   return (
     <section className="movie-poster">
       <Link to={`/${id}`}>
-        <img src={img} alt={`Poster of ${title}`} onClick={changeHomeBtn}/>
+        <img src={img} alt={`Poster of ${title}`}/>
       </Link>
       <div className='vote-banner'>
         <button className='vote-button' onClick={() => incrementVoteUp(id)}>
