@@ -27,7 +27,22 @@ Rotten Tomatillos is an app that allows users to browse through a collection of 
 
 ## Wins and Challenges
 ### Wins
-
+- Developed a deeper understanding of React, particularly in managing state and passing props between components.
+- Created a solid component architecture based on an initial plan, demonstrating flexibility as we adapted our approach during development.
+- Gained appreciation for the power of useState and useEffect hooks in simplifying state management and side effects.
+- Successfully refactored our code to implement React Router, including moving the fetch call for movie details to the appropriate component.
 ### Challenges
-
+Our most significant challenge was implementing the home button functionality:
+- Needed to match the comp's styling, placing the button on the same line as the title.
+- Required conditional rendering to hide the button on the home page.
+- Initially attempted using state management and CSS styling with an onClick method.
+After several iterations, we arrived at a simple and elegant solution using conditional rendering:
+```
+{location.pathname !== '/' && (
+  <Link to="/">
+    {/* Home button content */}
+  </Link>
+)} 
+```
+This challenge became a major win as the refactoring process significantly simplified our code, making it more maintainable and easier to understand.
 
