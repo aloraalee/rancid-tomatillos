@@ -95,6 +95,7 @@ useEffect(() => {
           incrementVoteDown={incrementVoteDown} 
           incrementVoteUp={incrementVoteUp}/>}/>
         <Route path='/:id' element={<MovieDetails/>} />
+        <Route path="*" element={<h2>404 - Page Not Found</h2>}/>
       </Routes>
     </main>
   );
